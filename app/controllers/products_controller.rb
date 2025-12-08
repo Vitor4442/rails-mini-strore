@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.expect(product: [:name, :description ])
+    params.require(:product).permit(:name, :description, :featured_image)
   end
 
 end
