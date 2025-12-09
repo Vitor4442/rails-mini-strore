@@ -43,7 +43,14 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :description, :featured_image)
+    params.require(:product).permit(:name, :description, :featured_image, :inventory_count)
+  end
+
+  around_action :swith_locale
+
+  def swith_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
   end
 
 end
